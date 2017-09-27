@@ -23,7 +23,7 @@ class ProductTest < ActiveSupport::TestCase
 		product.price = 1
 		assert product.valid?
 		assert product.errors[:price].none?
-end  
+	end  
 	test "image url must point to an image file" do
 		product = products(:one)
 		ok = %w{ frog.gif frog.jpg frog.png FROG.PNG fRoG.PnG
@@ -34,10 +34,19 @@ end
 		  product.image_url = url
 		  assert product.valid?, "#{url} should be a valid image url"
 		end
-
 		bad.each do |url|
 		  product.image_url = url
 		  assert product.invalid?, "#{url} shouldn't be a valid image url"
 		end
+	end
+	test "product is not valid without a unique title" do
+		product = Product.new(:title       => products(:ruby).title,
+		                      :description => "xxx",
+		                      :price       => 1,
+		                      :image_url   => "barney.gif")
+
+		assert product.invalid?
+		assert_equal ["has already been taken"], product.errors[:title]
+	end
 end
-end
+
