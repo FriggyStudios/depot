@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'catalogue/six_ball'
+
   resources :orders
   resources :line_items
   resources :carts
