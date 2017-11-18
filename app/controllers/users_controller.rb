@@ -54,11 +54,8 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    session[:user_id] = nil
+    redirect_to store_url, notice: "Logged out"  
   end
 
   private

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class OrdersControllerTest < ActionController::TestCase
-  setup do
+   setup do
     @order = orders(:one)
   end
 
