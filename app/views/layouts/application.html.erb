@@ -4,7 +4,14 @@
 <title>Pragprog Books Online Store</title>
 <head>
 <body>
-
+<% if session[:user_id] %>
+  <br />
+  <%= link_to 'Orders',   orders_path   %><br />
+  <%= link_to 'Products', products_path %><br />
+  <%= link_to 'Users',    users_path    %><br />
+  <br />
+  <%= button_to 'Logout', logout_path, :method => :delete   %>
+<% end %>
 <%= content_tag :body, class: controller.controller_name do %>
 <div id="banner">
   <%= image_tag("logo.png") %>
